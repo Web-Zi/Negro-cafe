@@ -1,1051 +1,296 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Negro Cafe - More Than Just A Coffee | قائمة الطعام الرقمية</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            400: '#F3C663',
-                            500: '#E0AA3E',
-                            600: '#C59127',
-                            700: '#9A6F1A'
-                        },
-                        cafe: {
-                            dark: '#0D0D0E',
-                            card: '#161619',
-                            border: '#27272A',
-                            accent: '#A88038'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['System-ui', 'Segoe UI', 'Roboto', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts for Arabic & English Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #0B0B0C;
-            color: #E4E4E7;
-        }
-        .en-title {
-            font-family: 'Playfair Display', serif;
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0D0D0E;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27272A;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #E0AA3E;
-        }
-        /* Smooth glassmorphism */
-        .glass-panel {
-            background: rgba(22, 22, 25, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF1B5 0%, #E0AA3E 50%, #9A6F1A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gold-border-glow:hover {
-            box-shadow: 0 0 15px rgba(224, 170, 62, 0.25);
-            border-color: rgba(224, 170, 62, 0.5);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEGRO COFFEE - Menu</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Coffee bean repeating pattern / textured background */
+      background-color: #121212;
+      background-image: radial-gradient(#262626 1px, transparent 1px), radial-gradient(#262626 1px, #121212 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* Hero Header Section */
+    .hero-header {
+      width: 100%;
+      background: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 30px 20px 20px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* Side Posters */
+    .hero-poster {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-poster img {
+      max-width: 220px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      /* Invert black-and-white art so line art displays cleanly on dark coffee background */
+      filter: invert(1) brightness(1.2);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hero-poster img:hover {
+      transform: scale(1.04);
+    }
+
+    /* Center Logo */
+    .hero-logo-wrapper {
+      flex: 1.2;
+      text-align: center;
+    }
+
+    .hero-logo {
+      max-width: 260px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: invert(1) brightness(1.2);
+    }
+
+    /* Category Navigation Wrapper */
+    .category-nav-wrapper {
+      background: rgba(18, 18, 18, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .category-nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+      padding: 15px 20px;
+      gap: 12px;
+      scrollbar-width: thin;
+    }
+
+    .category-nav::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .category-nav::-webkit-scrollbar-thumb {
+      background-color: #444;
+      border-radius: 4px;
+    }
+
+    .category-btn {
+      background-color: #222222;
+      border: 1px solid #444444;
+      color: #eeeeee;
+      border-radius: 20px;
+      padding: 8px 18px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.2;
+    }
+
+    .category-btn span.ar-sub {
+      font-size: 0.8em;
+      font-weight: normal;
+      color: #aaaaaa;
+      margin-top: 2px;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background-color: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    .category-btn:hover span.ar-sub,
+    .category-btn.active span.ar-sub {
+      color: #333333;
+    }
+
+    /* Menu Section Container */
+    .menu-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .category-section {
+      margin-bottom: 45px;
+    }
+
+    .category-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 8px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      color: #ffffff;
+    }
+
+    .category-title .ar-title {
+      font-size: 1.3rem;
+      color: #cccccc;
+      font-weight: normal;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .item-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      color: #111111;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .item-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .item-image {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      border-radius: 8px;
+    }
+
+    .item-name-en {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #111;
+    }
+
+    .item-name-ar {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 2px;
+      direction: rtl;
+    }
+
+    .item-prices {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #000000;
+      font-size: 1.05rem;
+      background: #f0f0f0;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    /* Responsive Mobile Layout */
+    @media (max-width: 768px) {
+      .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .hero-logo-wrapper {
+        order: 1;
+      }
+
+      .hero-poster {
+        display: none;
+      }
+
+      .hero-logo {
+        max-width: 190px;
+      }
+    }
+  </style>
 </head>
-<body class="min-h-screen pb-24 selection:bg-gold-500 selection:text-black">
+<body>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-zinc-800/80 px-4 py-3 sm:px-8">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            <!-- Brand Logo -->
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-full bg-black border border-gold-500/40 flex items-center justify-center shadow-lg shadow-black/50">
-                    <span class="text-gold-400 font-bold text-xl tracking-tighter en-title">N</span>
-                </div>
-                <div>
-                    <h1 class="text-xl font-extrabold text-white tracking-wide en-title leading-none">NEGRO <span class="text-gold-400 font-sans text-xs block font-normal tracking-widest mt-0.5">CAFE</span></h1>
-                    <p class="text-[10px] text-zinc-400 font-light hidden sm:block">MORE THAN JUST A COFFEE</p>
-                </div>
-            </div>
+  <!-- Hero Header Section -->
+  <header class="hero-header">
+    <div class="hero-container">
+      <!-- Left Poster -->
+      <div class="hero-poster poster-left">
+        <img src="poster 1.png" alt="Cafe Vibe 1" />
+      </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-md mx-2">
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 text-sm"></i>
-                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="بحث عن مشروب أو تحلية... / Search menu..." 
-                        class="w-full bg-zinc-900/90 border border-zinc-700/60 rounded-full py-2 pr-10 pl-4 text-xs sm:text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-gold-500 transition-all">
-                </div>
-            </div>
+      <!-- Center Logo -->
+      <div class="hero-logo-wrapper">
+        <img src="Logo.png" alt="NEGRO COFFEE" class="hero-logo" />
+      </div>
 
-            <!-- Quick Action Icons -->
-            <div class="flex items-center gap-2">
-                <a href="tel:+201507623027" title="اتصل بنا / Call us" 
-                    class="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-gold-400 hover:border-gold-500/50 transition-all">
-                    <i class="fa-solid fa-phone text-sm"></i>
-                </a>
-                <button onclick="toggleFavoritesFilter()" id="favToggleBtn" title="المفضلة / Favorites" 
-                    class="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-gold-400 hover:border-gold-500/50 transition-all relative">
-                    <i class="fa-solid fa-heart text-sm"></i>
-                    <span id="favBadge" class="hidden absolute -top-1 -right-1 bg-gold-500 text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
-                </button>
-                <button onclick="openCartModal()" id="cartBtn" title="حقيبة الطلبات / Order Tray" 
-                    class="px-3 py-2 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-black transition-all flex items-center gap-2 text-xs font-bold">
-                    <i class="fa-solid fa-mug-hot"></i>
-                    <span id="cartCount" class="bg-gold-500 text-black px-1.5 py-0.5 rounded-full text-[11px]">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Banner Section -->
-    <section class="relative overflow-hidden py-10 px-4 sm:px-8 border-b border-zinc-800/60 bg-gradient-to-b from-zinc-900/50 to-transparent">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#E0AA3E_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-7xl mx-auto relative z-10 text-center">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-gold-500/10 text-gold-400 border border-gold-500/20 mb-3">
-                تجربة القهوة الفاخرة • Premium Experience
-            </span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-2 leading-tight">
-                أهلاً بكم في <span class="gold-gradient-text">نيجرو كافيه</span>
-            </h2>
-            <p class="text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto font-light mb-6">
-                استمتع بتشكيلتنا المميزة من أجود أنواع القهوة، المشروبات الباردة والساخنة، والحلويات الغنية المحضرة خصيصاً لك.
-            </p>
-
-            <!-- Quick Info Cards Bar -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto text-xs text-zinc-300">
-                <a href="tel:+201507623027" class="glass-panel p-3 rounded-xl border border-zinc-800 flex items-center justify-center gap-2 hover:border-gold-500/40 transition-all">
-                    <i class="fa-solid fa-phone text-gold-400"></i>
-                    <span>+20 150 762 3027</span>
-                </a>
-                <div class="glass-panel p-3 rounded-xl border border-zinc-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-clock text-gold-400"></i>
-                    <span>12:00 PM - 1:00 AM</span>
-                </div>
-                <div class="glass-panel p-3 rounded-xl border border-zinc-800 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-location-dot text-gold-400"></i>
-                    <span>ش / احمد عرابي و حديقه فريال</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Category Filter Bar (Horizontal Scroll) -->
-    <nav class="sticky top-[61px] z-30 bg-[#0B0B0C]/95 backdrop-blur-md py-4 border-b border-zinc-800/60 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8">
-            <div id="categoryContainer" class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar text-xs sm:text-sm">
-                <!-- Dynamic categories populated via JS -->
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 pt-8">
-        <!-- Results Counter & Sort bar -->
-        <div class="flex items-center justify-between mb-6 text-xs text-zinc-400 border-b border-zinc-800/40 pb-3">
-            <div>
-                عرض <span id="itemCount" class="text-gold-400 font-bold">0</span> صنف في القائمة
-            </div>
-            <div class="flex items-center gap-2">
-                <label for="sortSelect" class="hidden sm:inline">ترتيب حسب:</label>
-                <select id="sortSelect" onchange="handleSort()" class="bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-gold-500">
-                    <option value="default">الافتراضي</option>
-                    <option value="price-asc">السعر: من الأقل للأعلى</option>
-                    <option value="price-desc">السعر: من الأعلى للأقل</option>
-                    <option value="name">الاسم</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Menu Grid -->
-        <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            <!-- Dynamic Items Injection -->
-        </div>
-
-        <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-16">
-            <i class="fa-solid fa-mug-saucer text-5xl text-zinc-700 mb-4"></i>
-            <h3 class="text-lg font-bold text-zinc-300 mb-1">لم يتم العثور على نتائج</h3>
-            <p class="text-xs text-zinc-500">جرب البحث بكلمات أخرى أو اختر قسم آخر</p>
-        </div>
-    </main>
-
-    <!-- Footer & Contact Section -->
-    <footer class="mt-20 border-t border-zinc-800/80 bg-zinc-950/80 py-10 px-4 sm:px-8 text-zinc-400">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-right">
-            <div>
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
-                    <div class="w-9 h-9 rounded-full bg-black border border-gold-500/40 flex items-center justify-center">
-                        <span class="text-gold-400 font-bold text-lg en-title">N</span>
-                    </div>
-                    <h3 class="text-lg font-extrabold text-white en-title">NEGRO <span class="text-gold-400 font-sans text-xs font-normal">CAFE</span></h3>
-                </div>
-                <p class="text-xs text-zinc-400 font-light leading-relaxed">
-                    MORE THAN JUST A COFFEE<br>
-                    مرحباً بكم دائماً للاستمتاع بأرقى وألذ المشروبات والحلويات في أجواء هادئة وفاخرة.
-                </p>
-            </div>
-
-            <div class="flex flex-col gap-2 text-xs">
-                <h4 class="text-sm font-bold text-white mb-2 text-gold-400">معلومات الاتصال والموقع</h4>
-                <div class="flex items-center justify-center md:justify-start gap-2">
-                    <i class="fa-solid fa-location-dot text-gold-500 w-4"></i>
-                    <span>ش / احمد عرابي و حديقه فريال</span>
-                </div>
-                <div class="flex items-center justify-center md:justify-start gap-2">
-                    <i class="fa-solid fa-clock text-gold-500 w-4"></i>
-                    <span dir="ltr">Available whenever you need from 12:00 p.m. to 1:00 a.m.</span>
-                </div>
-                <div class="flex items-center justify-center md:justify-start gap-2">
-                    <i class="fa-solid fa-phone text-gold-500 w-4"></i>
-                    <a href="tel:+201507623027" class="hover:text-gold-400 transition-colors" dir="ltr">+20 150 762 3027</a>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center md:items-end justify-between">
-                <div>
-                    <h4 class="text-sm font-bold text-white mb-3 text-gold-400">تابعونا على منصات التواصل</h4>
-                    <div class="flex items-center gap-3">
-                        <a href="https://www.instagram.com/negro__coffee?stkn=eHpnYzZqdGJ3bXN1" target="_blank" rel="noopener noreferrer" 
-                            class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-gold-400 hover:border-gold-500/50 flex items-center justify-center text-lg transition-all">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/share/18LSA3NdWD/" target="_blank" rel="noopener noreferrer" 
-                            class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-gold-400 hover:border-gold-500/50 flex items-center justify-center text-lg transition-all">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-                    </div>
-                </div>
-                <p class="text-[10px] text-zinc-600 mt-6">© 2026 Negro Cafe. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Item Detail Modal -->
-    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 transition-all">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative text-right flex flex-col max-h-[90vh]">
-            <button onclick="closeModal()" class="absolute top-3 left-3 z-10 bg-black/60 text-zinc-300 hover:text-white p-2 rounded-full backdrop-blur-sm transition-all">
-                <i class="fa-solid fa-xmark text-lg w-5 h-5 flex items-center justify-center"></i>
-            </button>
-            
-            <div class="relative h-64 bg-zinc-950 flex items-center justify-center overflow-hidden">
-                <img id="modalImg" src="" alt="" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
-                <span id="modalBadge" class="absolute top-4 right-4 bg-gold-500 text-black text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"></span>
-            </div>
-
-            <div class="p-6 overflow-y-auto flex-1">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 id="modalTitleAr" class="text-xl font-bold text-white mb-0.5"></h3>
-                        <p id="modalTitleEn" class="text-xs font-semibold text-gold-400 en-title"></p>
-                    </div>
-                    <div id="modalPrice" class="text-xl font-extrabold text-gold-400 bg-gold-500/10 px-3 py-1 rounded-xl border border-gold-500/20"></div>
-                </div>
-
-                <p id="modalDesc" class="text-zinc-400 text-sm mt-3 leading-relaxed font-light"></p>
-
-                <div class="mt-6 pt-4 border-t border-zinc-800">
-                    <span class="text-xs text-zinc-500 block mb-2 font-medium">ملاحظات التحضير / Special Instructions</span>
-                    <textarea id="modalNotes" rows="2" placeholder="أضف ملاحظاتك (مثال: سكر خفيف، بدون ثلج...)" 
-                        class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-gold-500"></textarea>
-                </div>
-            </div>
-
-            <div class="p-4 bg-zinc-950 border-t border-zinc-800/80 flex items-center gap-3">
-                <button onclick="addModalItemToCart()" class="flex-1 bg-gold-500 hover:bg-gold-400 text-black font-bold py-3 px-4 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-gold-500/20">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>إضافة إلى الحقيبة</span>
-                </button>
-            </div>
-        </div>
+      <!-- Right Poster -->
+      <div class="hero-poster poster-right">
+        <img src="poster 2.png" alt="Cafe Vibe 2" />
+      </div>
     </div>
+  </header>
 
-    <!-- Order Tray / Cart Sidebar Modal -->
-    <div id="cartModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex justify-end">
-        <div class="bg-zinc-900 border-r border-zinc-800 w-full max-w-md h-full flex flex-col justify-between shadow-2xl">
-            <div class="p-5 border-b border-zinc-800 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-mug-hot text-gold-400"></i>
-                    <h3 class="font-bold text-lg text-white">حقيبة الطلبات التجريبية</h3>
-                </div>
-                <button onclick="closeCartModal()" class="text-zinc-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
+  <!-- Navigation Bar for Categories -->
+  <div class="category-nav-wrapper">
+    <nav class="category-nav" id="categoryNav"></nav>
+  </div>
 
-            <div id="cartItemsContainer" class="p-5 overflow-y-auto flex-1 divide-y divide-zinc-800/60">
-                <!-- Items populated dynamically -->
-            </div>
+  <!-- Main Menu Display Area -->
+  <main class="menu-container" id="menuContainer"></main>
 
-            <div class="p-5 bg-zinc-950 border-t border-zinc-800">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-sm text-zinc-400">الإجمالي الإفتراضي:</span>
-                    <span id="cartTotal" class="text-xl font-bold text-gold-400">0 EGP</span>
-                </div>
-                <button onclick="alert('شغف القهوة يعلو! يسعدنا تقديم المشروبات لك داخل الفرع مباشر.')" class="w-full bg-gold-500 hover:bg-gold-400 text-black font-bold py-3 rounded-xl transition-all text-sm">
-                    تأكيد الطلب للطاولة / Order Preview
-                </button>
-            </div>
-        </div>
-    </div>
+  <!-- Load Menu Data -->
+  <script src="menu-data.js"></script>
 
-    <script>
-        // Data items extracted directly from uploaded Negro menu images and menus list
-        const menuData = [
-            // DESSERT CUPS
-            {
-                id: "d1",
-                category: "desserts",
-                titleAr: "تيراميسو كب",
-                titleEn: "Tiramisu Cup",
-                price: "40 EGP",
-                numPrice: 40,
-                desc: "تيراميسو إيطالي فاخر مع طبقات البسكويت المغطى بالقهوة والكاكاو الغني.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.48 PM (2).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "d2",
-                category: "desserts",
-                titleAr: "سينابون",
-                titleEn: "Cinnamon Roll",
-                price: "60 EGP",
-                numPrice: 60,
-                desc: "لفائف القرفة الطازجة مع الصوص الأبيض الغني والتغطية المقرمشة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM (1).jpeg"
-            },
-            {
-                id: "d3",
-                category: "desserts",
-                titleAr: "تشيز كيك كب",
-                titleEn: "Cheesecake Cup",
-                price: "20 EGP",
-                numPrice: 20,
-                desc: "كوب تشيز كيك كريمي خفيف مع صوص الفواكه أو الشوكولاتة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM.jpeg"
-            },
-            {
-                id: "d4",
-                category: "desserts",
-                titleAr: "فادج كب",
-                titleEn: "Fudge Cup",
-                price: "15 EGP",
-                numPrice: 15,
-                desc: "كوب الفادج الغني بالشوكولاتة الداكنة المذابة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.48 PM.jpeg"
-            },
-            {
-                id: "d5",
-                category: "desserts",
-                titleAr: "براونيز كب",
-                titleEn: "Brownies Cup / Bite",
-                price: "45 EGP",
-                numPrice: 45,
-                desc: "قطع البراونيز الطرية والغنية بقطع الشوكولاتة مع الصوص.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.13 PM.jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "d6",
-                category: "desserts",
-                titleAr: "مافن شوكولاتة",
-                titleEn: "Chocolate Chip Muffin",
-                price: "45 EGP",
-                numPrice: 45,
-                desc: "مافن الشوكولاتة الهش والمخبوز طازجاً بقطع الشوكولاتة اللذيذة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.48 PM (1).jpeg",
-                isCustomImg: true
-            },
+  <!-- Page Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const categoryNav = document.getElementById("categoryNav");
+      const menuContainer = document.getElementById("menuContainer");
 
-            // BREAKFAST & BAKERY
-            {
-                id: "b1",
-                category: "breakfast",
-                titleAr: "كرواسون سادة / جبنة",
-                titleEn: "Fresh Croissant",
-                price: "45 EGP",
-                numPrice: 45,
-                desc: "كرواسون هش ومقرمش بطبقات الزبدة الغنية، سادة أو محشو بالجبنة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.38 PM.jpeg"
-            },
-            {
-                id: "b2",
-                category: "breakfast",
-                titleAr: "ساندوتش كرواسون (رومي / سلامي)",
-                titleEn: "Croissant Sandwich",
-                price: "35 EGP",
-                numPrice: 35,
-                desc: "كرواسون طازج محشو باللحوم الباردة مع الجبن والخضار الطازج.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.02 PM (1).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "b3",
-                category: "breakfast",
-                titleAr: "توست بريوش / براون",
-                titleEn: "Toast Sandwich",
-                price: "50 EGP",
-                numPrice: 50,
-                desc: "شرائح التوست المحمصة مع حشواتك المفضلة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM.jpeg"
-            },
+      if (!window.NEGRO_MENU) {
+        console.error("Menu data not found!");
+        return;
+      }
 
-            // MILKSHAKES
-            {
-                id: "m1",
-                category: "milkshake",
-                titleAr: "مارشميلو روست شيك",
-                titleEn: "Marshmallow Rost Shake",
-                price: "100 EGP",
-                numPrice: 100,
-                desc: "ميلك شيك كريمي مغطى بقطع المارشميلو المحمصة الملونة.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.23 PM (2).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "m2",
-                category: "milkshake",
-                titleAr: "شوكو مينت",
-                titleEn: "Choco Mint Milkshake",
-                price: "80 EGP",
-                numPrice: 80,
-                desc: "مزيج الشوكولاتة الغنية مع انتعاش النعناع وشرائح الشوكولاتة المبروشة.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.23 PM (3).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "m3",
-                category: "milkshake",
-                titleAr: "شوكو وايت مينت",
-                titleEn: "Choco White Mint Milkshake",
-                price: "80 EGP",
-                numPrice: 80,
-                desc: "ميلك شيك النعناع الأبيض المنعش مع رقائق الشوكولاتة البيضاء.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.34 PM.jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "m4",
-                category: "milkshake",
-                titleAr: "شوكليت دروب",
-                titleEn: "Chocolate Drop Shake",
-                price: "75 EGP",
-                numPrice: 75,
-                desc: "ميلك شيك الشوكولاتة الكلاسيكية الغنية بالصوص المنهمر.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.27 PM.jpeg"
-            },
-            {
-                id: "m5",
-                category: "milkshake",
-                titleAr: "فانيليا / كراميل / بلوبيري / فراولة",
-                titleEn: "Flavored Milkshake",
-                price: "80 EGP",
-                numPrice: 80,
-                desc: "ميلك شيك منعش بنكهات الفانيليا، الكراميل، البلوبيري أو الفراولة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.27 PM (1).jpeg"
-            },
-            {
-                id: "m6",
-                category: "milkshake",
-                titleAr: "كيندر شوكلت",
-                titleEn: "Kinder Chocolate Shake",
-                price: "100 EGP",
-                numPrice: 100,
-                desc: "ميلك شيك شوكولاتة كيندر الفاخرة مع الكريمة المخفوقة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.27 PM (2).jpeg"
-            },
-            {
-                id: "m7",
-                category: "milkshake",
-                titleAr: "أوريو / ميكس وايت أوريو",
-                titleEn: "Oreo Shake",
-                price: "90 EGP",
-                numPrice: 90,
-                desc: "مخفوق بسكويت الأوريو مع الحليب والكريمة والغني بقطع الأوريو.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.28 PM.jpeg"
-            },
-            {
-                id: "m8",
-                category: "milkshake",
-                titleAr: "نوتيلا بالبندق",
-                titleEn: "Nutella Hazelnut Shake",
-                price: "105 EGP",
-                numPrice: 105,
-                desc: "ميلك شيك النوتيلا الأصلية المحمصة بحبيبات البندق.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.28 PM (1).jpeg"
-            },
-            {
-                id: "m9",
-                category: "milkshake",
-                titleAr: "لوتس شيك",
-                titleEn: "Lotus Biscoff Shake",
-                price: "100 EGP",
-                numPrice: 100,
-                desc: "مخفوق زبدة وبسكويت اللوتس المقرمش مع الكريمة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.28 PM (2).jpeg"
-            },
-            {
-                id: "m10",
-                category: "milkshake",
-                titleAr: "فستق (بيستاشيو)",
-                titleEn: "Pistachio Shake",
-                price: "110 EGP",
-                numPrice: 110,
-                desc: "ميلك شيك زبدة الفستق الحلبي الفاخر مع القطع المقرمشة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM.jpeg"
-            },
-
-            // SMOOTHIES
-            {
-                id: "s1",
-                category: "smoothie",
-                titleAr: "توت ريحان",
-                titleEn: "Toot Basil / Berry Basil",
-                price: "70 EGP",
-                numPrice: 70,
-                desc: "سموزي التوت البارد الممزوج بأوراق الريحان الطازجة لأعلى درجات الانتعاش.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.23 PM.jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "s2",
-                category: "smoothie",
-                titleAr: "ريد بيري ديلايت",
-                titleEn: "Red Berry Delight",
-                price: "80 EGP",
-                numPrice: 80,
-                desc: "سموزي التوت الأحمر المنعش بقوام كريمي مثلج.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.23 PM (1).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "s3",
-                category: "smoothie",
-                titleAr: "مانجو زنجبيل / كريم",
-                titleEn: "Mango Ginger Smoothie",
-                price: "70 EGP",
-                numPrice: 70,
-                desc: "مزيج استوائي مثالي من المانجو الطازج مع لمسة الزنجبيل المنعشة.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.13 PM (2).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "s4",
-                category: "smoothie",
-                titleAr: "فراولة قرفة",
-                titleEn: "Strawberry Cinnamon",
-                price: "70 EGP",
-                numPrice: 70,
-                desc: "سموزي الفراولة الطبيعية الممزوج بنكهة القرفة العطرية المميزة.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.13 PM (1).jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "s5",
-                category: "smoothie",
-                titleAr: "بلوبيري سموزي",
-                titleEn: "Blueberry Smoothie",
-                price: "65 EGP",
-                numPrice: 65,
-                desc: "سموزي التوت الأزرق الطبيعي مع أوراق النعناع المغذية.",
-                img: "WhatsApp Image 2026-10-04 at 10.51.14 PM.jpeg",
-                isCustomImg: true
-            },
-            {
-                id: "s6",
-                category: "smoothie",
-                titleAr: "باشون فروت سموزي",
-                titleEn: "Passion Fruit Smoothie",
-                price: "65 EGP",
-                numPrice: 65,
-                desc: "نكهة فاكهة العاطفة الاستوائية منعشة ومثلجة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM.jpeg"
-            },
-            {
-                id: "s7",
-                category: "smoothie",
-                titleAr: "كيوي مانجو / كيوي تفاح",
-                titleEn: "Kiwi Mango / Kiwi Apple",
-                price: "70 EGP",
-                numPrice: 70,
-                desc: "مزيج فاكهة الكيوي الخضراء مع المانجو الحلوة أو التفاح.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM (1).jpeg"
-            },
-
-            // COFFEE CORNER & ESPRESSO
-            {
-                id: "c1",
-                category: "coffee",
-                titleAr: "اسبريسو سينجل / دبل",
-                titleEn: "Espresso Single / Double",
-                price: "35 - 55 EGP",
-                numPrice: 35,
-                desc: "خلاصة القهوة الغنية والمركزة بلمسة الكريمة الذهبية.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.15 PM.jpeg"
-            },
-            {
-                id: "c2",
-                category: "coffee",
-                titleAr: "قهوة تركي / محوج",
-                titleEn: "Turkish Coffee / Spiced",
-                price: "20 - 25 EGP",
-                numPrice: 20,
-                desc: "قهوة تركية أصلية محضرة بعناية على الرمال.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.15 PM (1).jpeg"
-            },
-            {
-                id: "c3",
-                category: "coffee",
-                titleAr: "لاتيه / سبانيش لاتيه",
-                titleEn: "Latte / Spanish Latte",
-                price: "55 - 65 EGP",
-                numPrice: 55,
-                desc: "قهوة اسبريسو مع الحليب المبخر والرغوة الناعمة وسحر الحليب المكثف.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.15 PM (2).jpeg"
-            },
-            {
-                id: "c4",
-                category: "coffee",
-                titleAr: "كابتشينو",
-                titleEn: "Cappuccino",
-                price: "55 EGP",
-                numPrice: 55,
-                desc: "النسخة الكلاسيكية الغنية برغوة الحليب والكاكاو.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.16 PM.jpeg"
-            },
-            {
-                id: "c5",
-                category: "coffee",
-                titleAr: "كراميل ميكاتو",
-                titleEn: "Caramel Macchiato",
-                price: "60 EGP",
-                numPrice: 60,
-                desc: "طبقات الاسبريسو والحليب المبخر مع صوص الكراميل الذهبي.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.16 PM (1).jpeg"
-            },
-            {
-                id: "c6",
-                category: "coffee",
-                titleAr: "فلات وايت / كورتادو",
-                titleEn: "Flat White / Cortado",
-                price: "45 - 55 EGP",
-                numPrice: 45,
-                desc: "توازن رائع بين قوة الاسبريسو ونعومة الحليب الدسم.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.16 PM (2).jpeg"
-            },
-
-            // ICE DRINKS
-            {
-                id: "i1",
-                category: "ice_drinks",
-                titleAr: "آيس لاتيه",
-                titleEn: "Iced Latte",
-                price: "70 EGP",
-                numPrice: 70,
-                desc: "اسبريسو بارد مع الحليب العذب والثلج.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.26 PM.jpeg"
-            },
-            {
-                id: "i2",
-                category: "ice_drinks",
-                titleAr: "آيس سبانيش لاتيه",
-                titleEn: "Iced Spanish Latte",
-                price: "80 EGP",
-                numPrice: 80,
-                desc: "المشروب الأكثر طلباً: اسبريسو بارد وحليب مكثف محلى مع الثلج.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.26 PM (1).jpeg"
-            },
-            {
-                id: "i3",
-                category: "ice_drinks",
-                titleAr: "آيس فرابتشينو (موكا / كراميل / دولشي)",
-                titleEn: "Flavored Iced Frappuccino",
-                price: "75 EGP",
-                numPrice: 75,
-                desc: "مشروب قهوة فرابيه مثلج ومخفوق بالكامل مع الكريمة والصوص.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.26 PM (2).jpeg"
-            },
-            {
-                id: "i4",
-                category: "ice_drinks",
-                titleAr: "بوبا تابيوكا / سولتد كراميل",
-                titleEn: "Boba Tapioca / Salted Caramel",
-                price: "85 - 95 EGP",
-                numPrice: 85,
-                desc: "مشروب البوبا الشهير بحبيبات التابيوكا الطازجة والنكهات الغنية.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.27 PM.jpeg"
-            },
-
-            // HOT CHOCOLATE & HOT DRINKS
-            {
-                id: "h1",
-                category: "hot_drinks",
-                titleAr: "هوت شوكلت (نعناع / اوريو / نوتيلا)",
-                titleEn: "Flavored Hot Chocolate",
-                price: "60 - 80 EGP",
-                numPrice: 60,
-                desc: "شوكولاتة ساخنة كثيفة ومحضرة من أجود أنواع الكاكاو.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM.jpeg"
-            },
-            {
-                id: "h2",
-                category: "hot_drinks",
-                titleAr: "سحلب مكسرات / بستاشيو / لوتس",
-                titleEn: "Special Sahlab",
-                price: "45 - 75 EGP",
-                numPrice: 45,
-                desc: "سحلب دافئ ولذيذ مغطى بالمكسرات الفاخرة أو صوص البيستاشيو واللوتس.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM (1).jpeg"
-            },
-            {
-                id: "h3",
-                category: "hot_drinks",
-                titleAr: "شاي كرك / عدني",
-                titleEn: "Karak / Adeni Tea",
-                price: "40 EGP",
-                numPrice: 40,
-                desc: "شاي غني بالبهارات العطرية والحليب المبخر.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.15 PM.jpeg"
-            },
-
-            // SODA DRINKS & REFRESHERS
-            {
-                id: "soda1",
-                category: "soda",
-                titleAr: "باشون ليمون / كيوي ليمون نعناع",
-                titleEn: "Fresh Refreshing Soda",
-                price: "40 EGP",
-                numPrice: 40,
-                desc: "صودا فوارة ومبردة بنكهات الفواكه المنعشة والنعناع.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.38 PM.jpeg"
-            },
-            {
-                id: "soda2",
-                category: "soda",
-                titleAr: "ريد بول ديرنكس (Red Bull Mix)",
-                titleEn: "Red Bull Mix",
-                price: "80 EGP",
-                numPrice: 80,
-                desc: "مشروب الطاقة الشهير ممزوجاً بالنكهات والاستوائيات.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.38 PM (1).jpeg"
-            },
-
-            // KUNAFA & ICE CREAM
-            {
-                id: "k1",
-                category: "kunafa",
-                titleAr: "كنافة نابلسية جبنة / كريمة",
-                titleEn: "Nabulsiya Kunafa",
-                price: "50 - 150 EGP",
-                numPrice: 50,
-                desc: "كنافة نابلسية دافئة مقرمشة محشوة بالجبن الذائب أو الكريمة الغنية.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.48 PM (2).jpeg"
-            },
-            {
-                id: "k2",
-                category: "kunafa",
-                titleAr: "آيس كريم بولات",
-                titleEn: "Ice Cream Scoops",
-                price: "25 - 45 EGP",
-                numPrice: 25,
-                desc: "بولات آيس كريم فاخرة بنكهات الفانيليا، الشوكولاتة، المانجو والفراولة.",
-                img: "WhatsApp Image 2026-10-04 at 10.50.37 PM.jpeg"
-            }
-        ];
-
-        // Categories Configuration
-        const categories = [
-            { id: "all", nameAr: "الكل", nameEn: "All", icon: "fa-solid fa-border-all" },
-            { id: "desserts", nameAr: "الحلويات والكوب", nameEn: "Dessert Cups", icon: "fa-solid fa-cake-candles" },
-            { id: "milkshake", nameAr: "ميلك شيك", nameEn: "Milk Shake", icon: "fa-solid fa-glass-water" },
-            { id: "smoothie", nameAr: "سموزي", nameEn: "Smoothie", icon: "fa-solid fa-blender" },
-            { id: "coffee", nameAr: "القهوة والإسبريسو", nameEn: "Coffee Corner", icon: "fa-solid fa-mug-hot" },
-            { id: "ice_drinks", nameAr: "مشروبات مثلجة", nameEn: "Ice Drinks", icon: "fa-solid fa-whiskey-glass" },
-            { id: "hot_drinks", nameAr: "مشروبات ساخنة", nameEn: "Hot Drinks", icon: "fa-solid fa-fire text-amber-500" },
-            { id: "breakfast", nameAr: "المخبوزات والتوست", nameEn: "Bakery & Toast", icon: "fa-solid fa-bread-slice" },
-            { id: "soda", nameAr: "صودا وريدبول", nameEn: "Soda Drinks", icon: "fa-solid fa-bottle-water" },
-            { id: "kunafa", nameAr: "كنافة وآيس كريم", nameEn: "Kunafa & Ice Cream", icon: "fa-solid fa-bowl-food" }
-        ];
-
-        // State Management
-        let activeCategory = "all";
-        let favorites = JSON.parse(localStorage.getItem('negro_favs') || '[]');
-        let cart = [];
-        let activeItemForModal = null;
-        let searchQuery = "";
-        let currentSort = "default";
-        let showFavsOnly = false;
-
-        // Init function
-        window.onload = function() {
-            renderCategories();
-            renderMenuItems();
-            updateFavBadge();
-        };
-
-        // Render Category Pills
-        function renderCategories() {
-            const container = document.getElementById('categoryContainer');
-            container.innerHTML = categories.map(cat => `
-                <button onclick="setCategory('${cat.id}')" 
-                    class="flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300 font-medium ${
-                        activeCategory === cat.id && !showFavsOnly
-                        ? 'bg-gold-500 text-black shadow-lg shadow-gold-500/20 font-bold scale-105' 
-                        : 'bg-zinc-900/80 text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-800'
-                    }">
-                    <i class="${cat.icon} text-xs"></i>
-                    <span>${cat.nameAr}</span>
-                </button>
-            `).join('');
-        }
-
-        // Set active category
-        function setCategory(id) {
-            activeCategory = id;
-            showFavsOnly = false;
-            document.getElementById('favToggleBtn').classList.remove('bg-gold-500', 'text-black');
-            renderCategories();
-            renderMenuItems();
-        }
-
-        // Filter and Render Menu Items
-        function renderMenuItems() {
-            let filtered = menuData.filter(item => {
-                const matchesCat = (activeCategory === "all" || item.category === activeCategory);
-                const matchesSearch = item.titleAr.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      item.titleEn.toLowerCase().includes(searchQuery.toLowerCase());
-                const matchesFav = showFavsOnly ? favorites.includes(item.id) : true;
-                return matchesCat && matchesSearch && matchesFav;
-            });
-
-            // Handle Sorting
-            if (currentSort === "price-asc") {
-                filtered.sort((a, b) => a.numPrice - b.numPrice);
-            } else if (currentSort === "price-desc") {
-                filtered.sort((a, b) => b.numPrice - a.numPrice);
-            } else if (currentSort === "name") {
-                filtered.sort((a, b) => a.titleAr.localeCompare(b.titleAr));
-            }
-
-            const grid = document.getElementById('menuGrid');
-            const emptyState = document.getElementById('emptyState');
-            document.getElementById('itemCount').innerText = filtered.length;
-
-            if (filtered.length === 0) {
-                grid.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            } else {
-                emptyState.classList.add('hidden');
-            }
-
-            grid.innerHTML = filtered.map(item => {
-                const isFav = favorites.includes(item.id);
-                return `
-                    <div class="group bg-zinc-900/90 border border-zinc-800/80 hover:border-gold-500/50 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gold-border-glow">
-                        <div>
-                            <!-- Image Container -->
-                            <div class="relative h-48 bg-zinc-950 overflow-hidden cursor-pointer" onclick="openDetailModal('${item.id}')">
-                                <img src="${item.img}" alt="${item.titleAr}" 
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 loading="lazy"
-                                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80';">
-                                <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-80"></div>
-                                
-                                <!-- Favorite Button -->
-                                <button onclick="event.stopPropagation(); toggleFavorite('${item.id}')" 
-                                    class="absolute top-3 left-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-zinc-400 hover:text-red-500 transition-colors">
-                                    <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart text-sm"></i>
-                                </button>
-
-                                <span class="absolute bottom-2 right-3 text-[10px] font-bold bg-black/70 text-gold-400 px-2 py-0.5 rounded-full border border-gold-500/20 backdrop-blur-xs">
-                                    NEGRO SPECIAL
-                                </span>
-                            </div>
-
-                            <!-- Content -->
-                            <div class="p-4 cursor-pointer" onclick="openDetailModal('${item.id}')">
-                                <div class="flex justify-between items-start gap-2 mb-1">
-                                    <h3 class="font-bold text-white text-base group-hover:text-gold-400 transition-colors">${item.titleAr}</h3>
-                                    <span class="text-gold-400 font-extrabold text-sm whitespace-nowrap bg-gold-500/10 px-2.5 py-1 rounded-lg border border-gold-500/20">${item.price}</span>
-                                </div>
-                                <p class="text-[11px] text-gold-500/80 font-semibold en-title mb-2">${item.titleEn}</p>
-                                <p class="text-zinc-400 text-xs line-clamp-2 font-light leading-relaxed">${item.desc}</p>
-                            </div>
-                        </div>
-
-                        <!-- Action Bar -->
-                        <div class="p-3 bg-zinc-950/60 border-t border-zinc-800/60 flex items-center justify-between gap-2">
-                            <button onclick="openDetailModal('${item.id}')" class="text-xs text-zinc-400 hover:text-white flex items-center gap-1 font-medium px-2 py-1">
-                                <span>التفاصيل</span>
-                                <i class="fa-solid fa-chevron-left text-[10px]"></i>
-                            </button>
-                            <button onclick="quickAddToCart('${item.id}')" class="bg-gold-500/10 hover:bg-gold-500 text-gold-400 hover:text-black border border-gold-500/30 rounded-xl px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5">
-                                <i class="fa-solid fa-plus text-[10px]"></i>
-                                <span>إضافة</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Toggle Favorites
-        function toggleFavorite(id) {
-            if (favorites.includes(id)) {
-                favorites = favorites.filter(favId => favId !== id);
-            } else {
-                favorites.push(id);
-            }
-            localStorage.setItem('negro_favs', JSON.stringify(favorites));
-            updateFavBadge();
-            renderMenuItems();
-        }
-
-        function updateFavBadge() {
-            const badge = document.getElementById('favBadge');
-            if (favorites.length > 0) {
-                badge.innerText = favorites.length;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        }
-
-        function toggleFavoritesFilter() {
-            showFavsOnly = !showFavsOnly;
-            const btn = document.getElementById('favToggleBtn');
-            if (showFavsOnly) {
-                btn.classList.add('bg-gold-500', 'text-black');
-                btn.classList.remove('bg-zinc-900', 'text-zinc-400');
-            } else {
-                btn.classList.remove('bg-gold-500', 'text-black');
-                btn.classList.add('bg-zinc-900', 'text-zinc-400');
-            }
-            renderMenuItems();
-        }
-
-        // Search & Sort Handlers
-        function handleSearch() {
-            searchQuery = document.getElementById('searchInput').value;
-            renderMenuItems();
-        }
-
-        function handleSort() {
-            currentSort = document.getElementById('sortSelect').value;
-            renderMenuItems();
-        }
-
-        // Modal Logic
-        function openDetailModal(id) {
-            const item = menuData.find(i => i.id === id);
-            if (!item) return;
-
-            activeItemForModal = item;
-            document.getElementById('modalImg').src = item.img;
-            document.getElementById('modalTitleAr').innerText = item.titleAr;
-            document.getElementById('modalTitleEn').innerText = item.titleEn;
-            document.getElementById('modalPrice').innerText = item.price;
-            document.getElementById('modalDesc').innerText = item.desc;
-            document.getElementById('modalBadge').innerText = item.category.toUpperCase();
-            document.getElementById('modalNotes').value = "";
-
-            document.getElementById('detailModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('detailModal').classList.add('hidden');
-            activeItemForModal = null;
-        }
-
-        // Quick Cart Logic
-        function quickAddToCart(id) {
-            const item = menuData.find(i => i.id === id);
-            if (!item) return;
-            cart.push({ ...item, notes: "" });
-            updateCart();
-        }
-
-        function addModalItemToCart() {
-            if (!activeItemForModal) return;
-            const notes = document.getElementById('modalNotes').value;
-            cart.push({ ...activeItemForModal, notes });
-            updateCart();
-            closeModal();
-        }
-
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
-            renderCartItems();
-        }
-
-        function renderCartItems() {
-            const container = document.getElementById('cartItemsContainer');
-            if (cart.length === 0) {
-                container.innerHTML = '<p class="text-center text-zinc-500 text-xs py-10">حقيبة الطلبات فارغة حالياً</p>';
-                document.getElementById('cartTotal').innerText = '0 EGP';
-                return;
-            }
-
-            let total = 0;
-            container.innerHTML = cart.map((item, index) => {
-                total += item.numPrice;
-                return `
-                    <div class="py-3 flex items-center justify-between gap-3">
-                        <div>
-                            <h4 class="font-bold text-sm text-white">${item.titleAr}</h4>
-                            <p class="text-[10px] text-zinc-400">${item.notes ? 'ملاحظة: ' + item.notes : item.titleEn}</p>
-                            <span class="text-gold-400 font-extrabold text-xs mt-1 block">${item.price}</span>
-                        </div>
-                        <button onclick="removeFromCart(${index})" class="text-zinc-600 hover:text-red-400 text-xs p-1">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-            }).join('');
-
-            document.getElementById('cartTotal').innerText = `${total} EGP`;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function openCartModal() {
-            document.getElementById('cartModal').classList.remove('hidden');
-        }
-
-        function closeCartModal() {
-            document.getElementById('cartModal').classList.add('hidden');
-        }
-    </script>
-</body>
-</html>
+      // Render Category Buttons
+      window.NEGRO_MENU.forEach((cat, index) => {
+        const btn = document.createElement("button");
+        btn.className =
